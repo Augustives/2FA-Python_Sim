@@ -2,10 +2,6 @@ import pyotp
 import qrcode
 import io
 
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-mpl.rcParams['toolbar'] = 'None'
-
 from common import scrypt, generate_salt
 
 

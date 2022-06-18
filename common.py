@@ -1,5 +1,4 @@
 import base64
-from PIL import Image  
 
 from backports.pbkdf2 import pbkdf2_hmac
 from hashlib import sha256 as hash

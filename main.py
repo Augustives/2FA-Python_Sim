@@ -1,6 +1,5 @@
 from sys import exit
 
-from matplotlib.style import use
 from client import Client
 from server import Server
 
