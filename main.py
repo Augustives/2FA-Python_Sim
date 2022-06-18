@@ -10,7 +10,7 @@ SERVER = Server()
 
 def login():
     print('----------------------------------------------------')
-    print('\n### DOING LOGIN ###')
+    print('### DOING LOGIN ###')
     username, auth_token = CLIENT.login_register()
     if not SERVER.login(username, auth_token):
         print('Incorret username/password or user not registered\n')
@@ -21,7 +21,7 @@ def login():
 
 def register():
     print('----------------------------------------------------')
-    print('\n### REGISTERING USER ###')
+    print('### REGISTERING USER ###')
     username, auth_token = CLIENT.login_register()
     if not SERVER.register_user(username, auth_token):
         return print('Failed to register user\n')
@@ -30,7 +30,7 @@ def register():
 
 def two_factor_auth(username, auth_token):
     print('----------------------------------------------------')
-    print('\n### DOING 2FA ###')
+    print('### DOING 2FA ###')
     SERVER.two_factor_auth(username, auth_token)
     qrcode_value = CLIENT.two_factor_auth()
     if SERVER.validate_qrcode_value(qrcode_value):
@@ -43,7 +43,7 @@ def two_factor_auth(username, auth_token):
 
 def message_trading():
     print('----------------------------------------------------')
-    print('\n### TRADING MESSAGES ###')
+    print('### TRADING MESSAGES ###')
 
 
 def user_action_dispatch():
