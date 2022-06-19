@@ -2,7 +2,7 @@ import pyotp
 import qrcode
 import io
 
-from common import scrypt, generate_salt
+from common import scrypt, generate_salt, compose_session_key, decrypt_message, encrypt_message
 
 
 class Server:
@@ -44,6 +44,7 @@ class Server:
         
         qrcode_obj = qrcode.QRCode()
         qrcode_obj.add_data(self.totp.now())
+        print(self.totp.now())
         self.print_qrcode(qrcode_obj)
 
     def print_qrcode(self, qrcode_obj):
@@ -54,3 +55,15 @@ class Server:
 
     def validate_qrcode_value(self, qrcode_value):
         return self.totp.verify(qrcode_value)
+
+    def receive_and_return_new_message(self, username, qrcode_value, message):
+        session_key = compose_session_key(username, qrcode_value)
+        decrypted_message = decrypt_message(session_key, message)
+
+        decrypted_message_str = decrypted_message.decode("utf-8")
+
+        response_message = f"SERVER confirms receival of message: '{decrypted_message_str}'"
+
+        encrypted_response_message = encrypt_message(session_key, response_message)
+
+        return encrypted_response_message

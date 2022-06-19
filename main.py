@@ -35,15 +35,46 @@ def two_factor_auth(username, auth_token):
     qrcode_value = CLIENT.two_factor_auth()
     if SERVER.validate_qrcode_value(qrcode_value):
         print('2FA successfully')
-        return message_trading()
+        return message_trading(username, qrcode_value)
     else:
         print('Failed 2FA, try again')
         return two_factor_auth(username, auth_token)
 
 
-def message_trading():
+def message_trading(username, qrcode_value):
     print('----------------------------------------------------')
     print('### TRADING MESSAGES ###')
+
+    options = {
+        "1": "send_message",
+        "2": "return"
+    }
+
+    user_option = input(
+        '\n### CHOOSE ONE OF THE FOLLOWING OPTIONS ###\n'
+        '-Press 1 to send a message\n'
+        '-Press 2 to go back\n'
+    )
+
+    while options[user_option] == "send_message":
+        message = CLIENT.get_encrypted_message_to_send(username, qrcode_value)
+        print(f"Encrypted message sent from client to server: {message}")
+
+        response_message_encrypted = SERVER.receive_and_return_new_message(username, qrcode_value, message)
+        print(f"Encrypted message sent from server to client: {response_message_encrypted}")
+
+        response_message = CLIENT.receive_message_from_server(username, qrcode_value, response_message_encrypted)
+
+        print("### MESSAGE RECEIVED FROM SERVER ###")
+        print(response_message.decode("utf-8"))
+
+        user_option = input(
+            '\n### CHOOSE ONE OF THE FOLLOWING OPTIONS ###\n'
+            '-Press 1 to send another message\n'
+            '-Press 2 to go back\n'
+        )
+
+    return
 
 
 def user_action_dispatch():
