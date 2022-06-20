@@ -1,6 +1,6 @@
-#Tarefa Prática – Autenticação de dois fatores (2FA)
+# Tarefa Prática – Autenticação de dois fatores (2FA)
 
-##Como rodar:
+## Como rodar:
 Instalar as dependências utilizando o seguinte comando na raiz do projeto:
 
 '''pip install -r requirements.txt'''
