@@ -24,7 +24,7 @@ class Client:
     def get_encrypted_message_to_send(self, username, qrcode_value):
         session_key = compose_session_key(username, qrcode_value)
 
-        message = input("Please write the message: \n")
+        message = input("\nPlease write the message: \n")
         encrypted_message = encrypt_message(session_key, message)
 
         return encrypted_message

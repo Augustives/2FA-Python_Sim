@@ -58,14 +58,14 @@ def message_trading(username, qrcode_value):
 
     while options[user_option] == "send_message":
         message = CLIENT.get_encrypted_message_to_send(username, qrcode_value)
-        print(f"Encrypted message sent from client to server: {message}")
+        print(f"\nEncrypted message sent from client to server: {message}")
 
         response_message_encrypted = SERVER.receive_and_return_new_message(username, qrcode_value, message)
         print(f"Encrypted message sent from server to client: {response_message_encrypted}")
 
         response_message = CLIENT.receive_message_from_server(username, qrcode_value, response_message_encrypted)
 
-        print("### MESSAGE RECEIVED FROM SERVER ###")
+        print("\n### MESSAGE RECEIVED FROM SERVER ###")
         print(response_message.decode("utf-8"))
 
         user_option = input(
