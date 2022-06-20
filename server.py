@@ -44,8 +44,8 @@ class Server:
         
         qrcode_obj = qrcode.QRCode()
         qrcode_obj.add_data(self.totp.now())
-        print(self.totp.now())
         self.print_qrcode(qrcode_obj)
+        print(f'QrCode value: {self.totp.now()}')
 
     def print_qrcode(self, qrcode_obj):
         f = io.StringIO()
